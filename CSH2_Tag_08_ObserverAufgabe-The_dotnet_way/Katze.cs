@@ -8,7 +8,6 @@ namespace CSH2_Tag_08_ObserverAufgabe_The_dotnet_way
     {
         Dictionary<IObservable<Standort>, IDisposable> unsubscribers;
         string name;
-        IObservable<Standort> provider;
 
         public Katze(string name)
         {
@@ -20,7 +19,6 @@ namespace CSH2_Tag_08_ObserverAufgabe_The_dotnet_way
         {
             if(!unsubscribers.ContainsKey(provider))
                 unsubscribers.Add(provider, provider.Subscribe(this));
-            this.provider = provider;
         }
 
         public virtual void Unsubscribe(IObservable<Standort> provider)
@@ -44,7 +42,7 @@ namespace CSH2_Tag_08_ObserverAufgabe_The_dotnet_way
 
         public void OnNext(Standort value)
         {
-            Console.WriteLine($"Katze {name} meldet:\tFalle in Raum {value.Raum} wurde ausgelöst!");
+            Console.WriteLine($"Katze {name}:\tFalle in Raum {value.Raum} wurde ausgelöst!");
         }
     }
 }

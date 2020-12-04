@@ -16,7 +16,7 @@ namespace CSH2_Tag_08_ObserverAufgabe_The_dotnet_way
     }
     class Mausefalle : IObservable<Standort>
     {
-        protected List<IObserver<Standort>> observers;
+        List<IObserver<Standort>> observers;
         Standort raum;
 
         public Mausefalle(string standort)
