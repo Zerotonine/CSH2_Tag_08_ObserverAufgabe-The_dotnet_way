@@ -18,14 +18,18 @@ namespace CSH2_Tag_08_ObserverAufgabe_The_dotnet_way
 
         public virtual void Subscribe(IObservable<Standort> provider)
         {
-            unsubscribers.Add(provider, provider.Subscribe(this));
+            if(!unsubscribers.ContainsKey(provider))
+                unsubscribers.Add(provider, provider.Subscribe(this));
             this.provider = provider;
         }
 
         public virtual void Unsubscribe(IObservable<Standort> provider)
         {
-            unsubscribers[provider].Dispose();
-            unsubscribers.Remove(provider);
+            if (unsubscribers.ContainsKey(provider))
+            {
+                unsubscribers[provider].Dispose();
+                unsubscribers.Remove(provider);
+            }
         }
        
         public void OnCompleted()
